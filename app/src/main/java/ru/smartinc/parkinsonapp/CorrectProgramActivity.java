@@ -1,7 +1,7 @@
 package ru.smartinc.parkinsonapp;
 
+import android.content.Intent;
 import android.support.design.widget.CoordinatorLayout;
-import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -70,7 +70,9 @@ public class CorrectProgramActivity extends AppCompatActivity implements Recycle
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_add:
-                Toast.makeText(this, "Workin' unda that :)", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(this, ExerListActivity.class);
+                intent.putExtra("MODE", 1);
+                startActivityForResult(intent, 0);
                 return true;
             case R.id.action_generate:
                 Toast.makeText(this, "Shoud be dialog, but... :)", Toast.LENGTH_SHORT).show();
@@ -78,7 +80,25 @@ public class CorrectProgramActivity extends AppCompatActivity implements Recycle
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        switch (requestCode) {
+            case 0:
+                if (resultCode == RESULT_OK) {
+                    int id = data.getIntExtra("id", 0);
+                    Exercise e = RecyclerFiller.fill(this, RecyclerFiller.READ_FULL).get(id-1);
+                    if (e != null) {
+                        progList.add(e);
+                        rvAdapter.notifyItemInserted(progList.size()-1);
+                    }
+                }
+                break;
+            default:
+                super.onActivityResult(requestCode, resultCode, data);
+                break;
+        }
     }
 
     @Override
@@ -122,11 +142,6 @@ public class CorrectProgramActivity extends AppCompatActivity implements Recycle
             e.printStackTrace();
         }
 
-        finish();
-    }
-
-    public void onClickGenerate(View view) {
-        //TODO generation of new list
         finish();
     }
 }

@@ -24,6 +24,7 @@ import ru.smartinc.parkinsonapp.data.Exercise;
 public class DemoRecyclerAdapter extends RecyclerView.Adapter<DemoRecyclerAdapter.ViewHolder> {
     private Context context;
     private List<Exercise> exerList;
+    private View.OnClickListener listener;
 
     static class ViewHolder extends RecyclerView.ViewHolder {
         private final ImageView ivIcon;
@@ -43,6 +44,10 @@ public class DemoRecyclerAdapter extends RecyclerView.Adapter<DemoRecyclerAdapte
         this.exerList = exerList;
     }
 
+    public void setOnClickListener(View.OnClickListener listener) {
+        this.listener = listener;
+    }
+
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View item = LayoutInflater.from(parent.getContext())
@@ -58,6 +63,7 @@ public class DemoRecyclerAdapter extends RecyclerView.Adapter<DemoRecyclerAdapte
                 String.format(Locale.getDefault(),"%1$dm%2$02ds", exercise.getTime()/60, exercise.getTime()%60));
         holder.ivIcon.setImageResource(context.getResources()
                 .getIdentifier(exercise.getIcon(), "drawable", "ru.smartinc.parkinsonapp"));
+        holder.itemView.setOnClickListener(listener);
     }
 
     @Override

@@ -12,7 +12,7 @@ import android.widget.TextView;
 import java.util.List;
 
 import ru.smartinc.parkinsonapp.data.Exercise;
-import ru.smartinc.parkinsonapp.recycler.RecyclerAdapter;
+import ru.smartinc.parkinsonapp.recycler.DemoRecyclerAdapter;
 import ru.smartinc.parkinsonapp.recycler.RecyclerFiller;
 
 public class StartProgramActivity extends AppCompatActivity {
@@ -38,7 +38,7 @@ public class StartProgramActivity extends AppCompatActivity {
         rvProgram.setHasFixedSize(true);
         RecyclerView.LayoutManager rvManager = new LinearLayoutManager(this);
         rvProgram.setLayoutManager(rvManager);
-        RecyclerAdapter rAdapter = new RecyclerAdapter(this, progList);
+        DemoRecyclerAdapter rAdapter = new DemoRecyclerAdapter(this, progList);
         rvProgram.setAdapter(rAdapter);
 
         int progTime = 0;
