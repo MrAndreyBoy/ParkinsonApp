@@ -1,0 +1,52 @@
+{
+  "exercises": [
+    {
+      "id": 1,
+      "name": "Exercise 1",
+      "icon": "@mipmap/ic_launcher",
+      "time": 30
+    },
+    {
+      "id": 2,
+      "name": "Exercise 2",
+      "icon": "@mipmap/ic_launcher_round",
+      "time": 60
+    },
+    {
+      "id": 3,
+      "name": "Exercise 3",
+      "icon": "@mipmap/ic_launcher_round",
+      "time": 180
+    },
+    {
+      "id": 4,
+      "name": "Exercise 4",
+      "icon": "@mipmap/ic_launcher_round",
+      "time": 240
+    },
+    {
+      "id": 5,
+      "name": "Exercise 5",
+      "icon": "@mipmap/ic_launcher_round",
+      "time": 300
+    },
+    {
+      "id": 6,
+      "name": "Exercise 6",
+      "icon": "@mipmap/ic_launcher_round",
+      "time": 360
+    },
+    {
+      "id": 7,
+      "name": "Exercise 7",
+      "icon": "@mipmap/ic_launcher_round",
+      "time": 420
+    },
+    {
+      "id": 8,
+      "name": "Exercise 8",
+      "icon": "@mipmap/ic_launcher_round",
+      "time": 480
+    }
+  ]
+}
