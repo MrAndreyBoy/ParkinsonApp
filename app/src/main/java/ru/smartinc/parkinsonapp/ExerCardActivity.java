@@ -11,8 +11,13 @@ import android.widget.Button;
 import android.widget.Chronometer;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import java.util.List;
 import java.util.Locale;
+
+import ru.smartinc.parkinsonapp.data.Exercise;
+import ru.smartinc.parkinsonapp.recycler.RecyclerFiller;
 
 public class ExerCardActivity extends AppCompatActivity {
 
@@ -29,7 +34,10 @@ public class ExerCardActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_exer_card);
         Toolbar tbMain = (Toolbar) findViewById(R.id.tbMain);
+        tbMain.setTitle("WTF???");
         setSupportActionBar(tbMain);
+
+        final List<Exercise> exerList = RecyclerFiller.fill(this, RecyclerFiller.READ_FULL);
 
         tvExerName = (TextView) findViewById(R.id.tvExerName);
         tvTime = (TextView) findViewById(R.id.tvTime);
@@ -37,10 +45,27 @@ public class ExerCardActivity extends AppCompatActivity {
         btnNext = (Button) findViewById(R.id.btnNext);
 
         Intent intent = getIntent();
-        tvExerName.setText(intent.getStringExtra("name"));
-        ivExerIcon.setImageResource(intent.getIntExtra("icon", R.mipmap.ic_launcher_round));
 
-        exerTime = intent.getIntExtra("time", 0);
+        int id = intent.getIntExtra("id", 0);
+        Exercise exercise = null;
+        for (Exercise e: exerList) {
+            if (e.getId() == id) {
+                exercise = e;
+                break;
+            }
+        }
+        if (exercise == null) {
+            Toast.makeText(this, "Error: Exercise not found", Toast.LENGTH_SHORT).show();
+            finish();
+            return;
+        }
+
+        tbMain.setTitle(exercise.getName());
+        tvExerName.setText(exercise.getName());
+        ivExerIcon.setImageResource(getResources()
+                .getIdentifier(exercise.getIcon(), "drawable", "ru.smartinc.parkinsonapp"));
+
+        exerTime = exercise.getTime();
         tvTime.setText((exerTime/60) + ":" + (exerTime%60));
 
         cdTimer = new CountDownTimer(exerTime*1000, 1000) {
@@ -91,11 +116,12 @@ public class ExerCardActivity extends AppCompatActivity {
     }
 
     public void onClickStop(View view) {
+        setResult(RESULT_CANCELED);
         finish();
     }
 
     public void onClickNext(View view) {
-        startActivity(new Intent(this, FinishActivity.class));
+        setResult(RESULT_OK);
         finish();
     }
 }

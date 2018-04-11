@@ -19,6 +19,7 @@ public class StartProgramActivity extends AppCompatActivity {
 
     RecyclerView rvProgram;
     TextView tvProgramTime;
+    List<Exercise> progList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,7 +33,7 @@ public class StartProgramActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
 
-        List<Exercise> progList = RecyclerFiller.fill(this, RecyclerFiller.READ_PROGRAM);
+        progList = RecyclerFiller.fill(this, RecyclerFiller.READ_PROGRAM);
 
         rvProgram = findViewById(R.id.rvProgram);
         rvProgram.setHasFixedSize(true);
@@ -50,7 +51,10 @@ public class StartProgramActivity extends AppCompatActivity {
     }
 
     public void onClickStart(View view) {
-        startActivity(new Intent(this, ExerCardWelcomeActivity.class));
+        Intent intent = new Intent(this, ExerCardWelcomeActivity.class);
+        intent.putExtra("id", progList.get(0).getId())
+                .putExtra("progNum", 1%(progList.size()));
+        startActivity(intent);
     }
 
     public void onClickCorrectProgram(View view) {
