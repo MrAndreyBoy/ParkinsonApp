@@ -75,7 +75,7 @@ public class CorrectProgramActivity extends AppCompatActivity implements Recycle
                 startActivityForResult(intent, 0);
                 return true;
             case R.id.action_generate:
-                Toast.makeText(this, "Shoud be dialog, but... :)", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Work in progress... :)", Toast.LENGTH_SHORT).show();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

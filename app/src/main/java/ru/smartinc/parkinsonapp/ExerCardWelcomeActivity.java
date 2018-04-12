@@ -28,12 +28,12 @@ public class ExerCardWelcomeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_exer_card_welcome);
         Toolbar tbMain = (Toolbar) findViewById(R.id.tbMain);
+        tbMain.setTitle("Exercise name");
         setSupportActionBar(tbMain);
 
         final List<Exercise> exerList = RecyclerFiller.fill(this, RecyclerFiller.READ_FULL);
         progList = RecyclerFiller.fill(this, RecyclerFiller.READ_PROGRAM);
 
-        tvExerName = (TextView) findViewById(R.id.tvExerName);
         ivExerIcon = (ImageView) findViewById(R.id.ivExerIcon);
 
         intent = getIntent();
@@ -49,7 +49,7 @@ public class ExerCardWelcomeActivity extends AppCompatActivity {
             Toast.makeText(this, "Error: Exercise not found", Toast.LENGTH_SHORT).show();
             finish();
         } else {
-            tvExerName.setText(exercise.getName());
+            tbMain.setTitle(exercise.getName());
             ivExerIcon.setImageResource(getResources()
                     .getIdentifier(exercise.getIcon(), "drawable", "ru.smartinc.parkinsonapp"));
         }

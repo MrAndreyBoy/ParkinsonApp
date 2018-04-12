@@ -34,12 +34,11 @@ public class ExerCardActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_exer_card);
         Toolbar tbMain = (Toolbar) findViewById(R.id.tbMain);
-        tbMain.setTitle("WTF???");
+        tbMain.setTitle("Exercise name");
         setSupportActionBar(tbMain);
 
         final List<Exercise> exerList = RecyclerFiller.fill(this, RecyclerFiller.READ_FULL);
 
-        tvExerName = (TextView) findViewById(R.id.tvExerName);
         tvTime = (TextView) findViewById(R.id.tvTime);
         ivExerIcon = (ImageView) findViewById(R.id.ivExerIcon);
         btnNext = (Button) findViewById(R.id.btnNext);
@@ -61,7 +60,6 @@ public class ExerCardActivity extends AppCompatActivity {
         }
 
         tbMain.setTitle(exercise.getName());
-        tvExerName.setText(exercise.getName());
         ivExerIcon.setImageResource(getResources()
                 .getIdentifier(exercise.getIcon(), "drawable", "ru.smartinc.parkinsonapp"));
 
